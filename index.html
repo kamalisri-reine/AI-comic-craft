@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft — Make a story come alive</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="ComicCraft home"><span class="brand-mark">C!</span> ComicCraft</a>
+    <span class="top-note">Your imagination, panel by panel</span>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">YOUR STORY. YOUR COMIC.</p>
+      <h1>Make a story<br>come <span>alive.</span></h1>
+      <p class="intro-copy">Give us a spark of an idea. We’ll turn it into a fully illustrated comic, made just for you.</p>
+      {% if demo_mode %}
+      <aside class="mode-banner"><strong>Local demo mode</strong><span>Works without API keys. Stories use templates and panels use locally drawn placeholder artwork.</span></aside>
+      {% endif %}
+      <div class="mini-panels" aria-hidden="true"><span>✦</span><span>…</span><span>POW!</span></div>
+    </section>
+    <section class="form-card">
+      <div class="card-heading"><div><p class="eyebrow">THE CREATIVE BRIEF</p><h2>Set the scene</h2></div><span class="step">01 / 01</span></div>
+      <form id="comic-form">
+        <label for="prompt">What’s your story about?</label>
+        <textarea id="prompt" name="prompt" minlength="8" maxlength="1200" placeholder="A brave fox discovers a hidden door in an enchanted forest…" required></textarea>
+        <div class="field-grid">
+          <div><label for="character_name">Main character</label><input id="character_name" name="character_name" maxlength="80" placeholder="e.g. Felix the Fox" required></div>
+          <div><label for="setting">Setting</label><input id="setting" name="setting" maxlength="160" placeholder="e.g. enchanted forest" required></div>
+        </div>
+        <div class="field-grid">
+          <div><label for="tone">Story tone</label><select id="tone" name="tone"><option value="adventurous">Adventurous</option><option value="dramatic">Dramatic</option><option value="funny">Funny</option><option value="heartwarming">Heartwarming</option><option value="mysterious">Mysterious</option></select></div>
+          <div><label for="art_style">Art style</label><select id="art_style" name="art_style"><option value="comic book">Comic book</option><option value="anime">Anime</option><option value="watercolor">Watercolor</option><option value="pixel art">Pixel art</option><option value="storybook">Storybook</option></select></div>
+        </div>
+        <div class="field-grid last-fields">
+          <div><label for="panel_count">Number of panels</label><select id="panel_count" name="panel_count"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></div><div></div>
+        </div>
+        <button class="primary-button" id="generate-button" type="submit"><span>Craft my comic</span><span aria-hidden="true">↗</span></button>
+        {% if demo_mode %}
+        <p class="fine-print">Local demo mode · No Gemini or Stable Diffusion API calls</p>
+        {% else %}
+        <p class="fine-print">Storytelling by Gemini · Illustrations by Stable Diffusion</p>
+        {% endif %}
+      </form>
+    </section>
+    <section id="status" class="status" role="status" aria-live="polite" hidden></section>
+    <section id="preview" class="preview" hidden>
+      <div class="preview-heading"><div><p id="preview-mode" class="eyebrow">FRESH OFF THE PRESS</p><h2 id="comic-title"></h2></div><button id="download-button" class="secondary-button" type="button">Download PDF <span>↓</span></button></div>
+      <div id="panel-grid" class="panel-grid"></div>
+    </section>
+  </main>
+  <footer>Made for storytellers, dreamers, and doodlers.</footer>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
